@@ -1,0 +1,306 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f4f5f7;
+  color: #222;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  font-size: 16px;
+  background: white;
+}
+.app {
+  min-height: 100vh;
+}
+
+.container {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 18px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+}
+
+.principal {
+  text-align: center;
+}
+
+.etiqueta {
+  font-size: 14px;
+  font-weight: bold;
+  color: #666;
+}
+
+.importe-principal {
+  font-size: 48px;
+  font-weight: bold;
+  margin-top: 12px;
+}
+
+.subtitulo {
+  color: #777;
+  margin-bottom: 24px;
+}
+
+.resumen {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.resumen div {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.resumen span {
+  color: #777;
+  font-size: 14px;
+}
+
+.resumen strong {
+  font-size: 20px;
+  margin-top: 4px;
+}
+
+.barra {
+  width: 100%;
+  height: 14px;
+  background: #ddd;
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 22px;
+}
+
+.barra-progreso {
+  height: 100%;
+  background: #3b82f6;
+}
+
+button {
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  padding: 14px;
+  font-weight: bold;
+  font-size: 16px;
+  background: #2563eb;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #1d4ed8;
+}
+
+h2 {
+  margin-top: 0;
+  font-size: 20px;
+}
+
+.movimiento {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.movimiento:last-child {
+  border-bottom: none;
+}
+
+.movimiento div {
+  display: flex;
+  flex-direction: column;
+}
+
+.movimiento span {
+  color: #777;
+  font-size: 14px;
+  margin-top: 3px;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  margin-top: 14px;
+  font-weight: bold;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  font-size: 16px;
+}
+
+.boton-secundario {
+  margin-top: 10px;
+  background: #e5e7eb;
+  color: #222;
+}
+
+.boton-secundario:hover {
+  background: #d1d5db;
+}
+
+.fecha-gasto {
+  color: #999;
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.categoria-gasto {
+  font-size: 13px;
+  font-weight: bold;
+  color: #2563eb;
+  margin-top: 3px;
+}
+
+.movimiento-derecha {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.acciones-gasto {
+  display: flex;
+  gap: 6px;
+}
+
+.acciones-gasto button {
+  width: auto;
+  padding: 5px 9px;
+  font-size: 12px;
+  border-radius: 6px;
+}
+
+.boton-editar {
+  background: #e5e7eb;
+  color: #222;
+}
+
+.boton-editar:hover {
+  background: #d1d5db;
+}
+
+.boton-borrar {
+  background: #ef4444;
+}
+
+.boton-borrar:hover {
+  background: #dc2626;
+}
+.movimiento-clickable {
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.movimiento-clickable:hover {
+  background: #f8fafc;
+}
+
+.movimiento-importe {
+  font-weight: bold;
+  font-size: 18px;
+  white-space: nowrap;
+}
+
+.modal-fondo {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  z-index: 1000;
+}
+
+.modal-card {
+  width: 100%;
+  max-width: 420px;
+
+  background: white;
+  border-radius: 18px;
+
+  padding: 24px;
+
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
+}
+
+.modal-card h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.detalle-gasto {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  margin-bottom: 22px;
+}
+
+.detalle-gasto div {
+  display: flex;
+  flex-direction: column;
+}
+
+.detalle-gasto span {
+  color: #777;
+  font-size: 13px;
+}
+
+.detalle-gasto strong {
+  margin-top: 3px;
+}
+
+.detalle-importe {
+  font-size: 26px;
+}
+
+.boton-borrar-modal {
+  margin-top: 10px;
+  background: #ef4444;
+}
+
+.boton-borrar-modal:hover {
+  background: #dc2626;
+}
