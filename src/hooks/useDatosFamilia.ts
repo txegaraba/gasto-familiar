@@ -125,5 +125,5 @@ export function useDatosFamilia(usuario: User | null) {
     await Promise.all([cargarGastos(), cargarGastosHoy()])
   }
 
-  return { gastos, gastosHoy, categorias, miembroActual, obtenerFamiliaUsuario, obtenerNombreCategoria, borrarGasto, recargarGastos }
+  return { gastos, gastosHoy, categorias, miembroActual, obtenerFamiliaUsuario, obtenerNombreCategoria, borrarGasto, recargarGastos, recargarDatosUsuario: cargarDatosUsuario }
 }

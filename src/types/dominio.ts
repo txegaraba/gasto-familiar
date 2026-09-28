@@ -13,6 +13,23 @@ export type Categoria = {
   nombre: string
   orden: number
 }
+
+export type Familia = {
+  id: number
+  nombre: string
+}
+
+export type CategoriaAdministracion = Categoria & { activa: boolean }
+
+export type MiembroAdministracion = MiembroFamilia & { usuario_id: string }
+
+export type NuevoUsuario = {
+  email: string
+  password: string
+  familia_id: number
+  nombre: string
+  rol: MiembroFamilia['rol']
+}
 export type MiembroFamilia = {
   familia_id: number
   nombre: string

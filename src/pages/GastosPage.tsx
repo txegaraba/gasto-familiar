@@ -1,4 +1,7 @@
+import { useState } from 'react'
 import type { Gasto } from '../types/dominio'
+import { BotonConfiguracion } from '../components/configuracion/BotonConfiguracion'
+import { ConfiguracionModal } from '../components/configuracion/ConfiguracionModal'
 import type { useDatosFamilia } from '../hooks/useDatosFamilia'
 import type { useFormularioGasto } from '../hooks/useFormularioGasto'
 import { usePresupuestoFamilia } from '../hooks/usePresupuestoFamilia'
@@ -17,10 +20,21 @@ type Props = {
 export function GastosPage({ datos, formulario, gastoSeleccionado, setGastoSeleccionado, cerrarSesion }: Props) {
   const { miembroActual, categorias, gastos, obtenerNombreCategoria, borrarGasto } = datos
   const presupuesto = usePresupuestoFamilia(miembroActual?.familia_id ?? null, gastos)
+  const [mostrarConfiguracion, setMostrarConfiguracion] = useState(false)
+  const esAdministrador = miembroActual?.rol === 'administrador' && miembroActual.activo
   return (
     <div className="app">
       <div className="container">
-        <h1>Gastos Familia</h1>
+        <header className="cabecera-app">
+          <h1>Gastos Familia</h1>
+          {esAdministrador && <BotonConfiguracion abrir={() => setMostrarConfiguracion(true)} />}
+        </header>
+        {mostrarConfiguracion && esAdministrador && miembroActual && (
+          <ConfiguracionModal familiaId={miembroActual.familia_id} cerrar={() => {
+            setMostrarConfiguracion(false)
+            void datos.recargarDatosUsuario()
+          }} />
+        )}
         {miembroActual && (
           <p style={{ textAlign: 'center' }}>
             {miembroActual.nombre} · {miembroActual.rol}
