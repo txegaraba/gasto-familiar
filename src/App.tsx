@@ -19,6 +19,8 @@ type Categoria = {
 type MiembroFamilia = {
   familia_id: number
   nombre: string
+  rol: 'administrador' | 'usuario'
+  activo: boolean
 }
 
 function App() {
@@ -41,6 +43,9 @@ function App() {
   const [gastoEditando, setGastoEditando] = useState<Gasto | null>(null)
   const [presupuestoDiario, setPresupuestoDiario] = useState(0)
   const [gastoSeleccionado, setGastoSeleccionado] = useState<Gasto | null>(null)
+  const [miembroActual, setMiembroActual] =  useState<MiembroFamilia | null>(null)
+  const esAdministrador = miembroActual?.rol === 'administrador'
+
   // =========================
   // CÁLCULOS DEL DÍA ACTUAL
   // =========================
@@ -98,7 +103,7 @@ function App() {
     } else {
       setGastos([])
       setGastosHoy([])
-      setPresupuestoDiario(0)
+      setMiembroActual(null)
     }
   }, [usuario])
 
@@ -134,7 +139,7 @@ function App() {
 
     const { data, error } = await supabase
       .from('miembros_familia')
-      .select('familia_id, nombre')
+      .select('familia_id, nombre, rol, activo')
       .eq('usuario_id', usuario.id)
       .single()
 
@@ -301,8 +306,9 @@ function obtenerNombreCategoria(categoriaId: number | null) {
       return
     }
 
+    setMiembroActual(miembro)
+
     await Promise.all([
-      cargarPresupuesto(miembro.familia_id),
       cargarCategorias(miembro.familia_id),
       cargarGastos(),
       cargarGastosHoy(),
@@ -515,6 +521,12 @@ async function guardarGasto() {
       <div className="container">
 
         <h1>Gastos Familia</h1>
+
+        {miembroActual && (
+          <p style={{ textAlign: 'center' }}>
+            {miembroActual.nombre} · {miembroActual.rol}
+          </p>
+        )}
 
         <section className="card principal">
 
