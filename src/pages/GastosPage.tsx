@@ -1,6 +1,7 @@
 import type { Gasto } from '../types/dominio'
 import type { useDatosFamilia } from '../hooks/useDatosFamilia'
 import type { useFormularioGasto } from '../hooks/useFormularioGasto'
+import { usePresupuestoFamilia } from '../hooks/usePresupuestoFamilia'
 import { ResumenDiario } from '../components/gastos/ResumenDiario'
 import { GastoForm } from '../components/gastos/GastoForm'
 import { ListaGastos } from '../components/gastos/ListaGastos'
@@ -14,7 +15,8 @@ type Props = {
 }
 
 export function GastosPage({ datos, formulario, gastoSeleccionado, setGastoSeleccionado, cerrarSesion }: Props) {
-  const { miembroActual, gastosHoy, categorias, gastos, obtenerNombreCategoria, borrarGasto } = datos
+  const { miembroActual, categorias, gastos, obtenerNombreCategoria, borrarGasto } = datos
+  const presupuesto = usePresupuestoFamilia(miembroActual?.familia_id ?? null, gastos)
   return (
     <div className="app">
       <div className="container">
@@ -24,7 +26,7 @@ export function GastosPage({ datos, formulario, gastoSeleccionado, setGastoSelec
             {miembroActual.nombre} · {miembroActual.rol}
           </p>
         )}
-        <ResumenDiario gastosHoy={gastosHoy} nuevoGasto={formulario.nuevoGasto} cerrarSesion={cerrarSesion} />
+        <ResumenDiario presupuesto={presupuesto} nuevoGasto={formulario.nuevoGasto} cerrarSesion={cerrarSesion} />
         {formulario.mostrarFormulario && <GastoForm categorias={categorias} formulario={formulario} />}
         <ListaGastos
           gastos={gastos}
