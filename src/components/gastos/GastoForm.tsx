@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import type { Categoria } from '../../types/dominio'
 import type { useFormularioGasto } from '../../hooks/useFormularioGasto'
 
@@ -8,18 +9,40 @@ type Props = {
 
 export function GastoForm({ categorias, formulario }: Props) {
   const { gastoEditando, importe, setImporte, categoriaId, setCategoriaId, concepto, setConcepto, guardarGasto, cancelar } = formulario
-  return (
-    <section className="card">
+  const dialogoRef = useRef<HTMLDialogElement>(null)
 
-      <h2>
+  useEffect(() => {
+    const dialogo = dialogoRef.current
+    const overflowAnterior = document.body.style.overflow
+    dialogo?.showModal()
+    document.body.style.overflow = 'hidden'
+    return () => {
+      dialogo?.close()
+      document.body.style.overflow = overflowAnterior
+    }
+  }, [])
+
+  return (
+    <dialog
+      ref={dialogoRef}
+      className="modal-card gasto-form-modal"
+      aria-labelledby="gasto-form-titulo"
+      onCancel={(event) => {
+        event.preventDefault()
+        cancelar()
+      }}
+    >
+
+      <h2 id="gasto-form-titulo">
         {gastoEditando ? 'Editar gasto' : 'Nuevo gasto'}
       </h2>
 
-      <label>
+      <label htmlFor="gasto-importe">
         Importe
       </label>
 
       <input
+        id="gasto-importe"
         type="text"
         inputMode="decimal"
         placeholder="0,00"
@@ -27,11 +50,12 @@ export function GastoForm({ categorias, formulario }: Props) {
         onChange={(e) => setImporte(e.target.value)}
       />
 
-      <label>
+      <label htmlFor="gasto-categoria">
         Categoría
       </label>
 
       <select
+        id="gasto-categoria"
         value={categoriaId}
         onChange={(e) => setCategoriaId(e.target.value)}
       >
@@ -49,11 +73,12 @@ export function GastoForm({ categorias, formulario }: Props) {
         ))}
       </select>
 
-      <label>
+      <label htmlFor="gasto-concepto">
         Concepto
       </label>
 
       <input
+        id="gasto-concepto"
         type="text"
         placeholder="Ej. Supermercado"
         value={concepto}
@@ -71,6 +96,6 @@ export function GastoForm({ categorias, formulario }: Props) {
         Cancelar
       </button>
 
-    </section>
+    </dialog>
   )
 }

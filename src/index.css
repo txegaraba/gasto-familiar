@@ -270,6 +270,21 @@ input {
   margin-bottom: 20px;
 }
 
+.gasto-form-modal {
+  width: calc(100% - 32px);
+  max-height: calc(100vh - 32px);
+  max-height: calc(100dvh - 32px);
+  margin: auto;
+  border: none;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  color: inherit;
+}
+
+.gasto-form-modal::backdrop {
+  background: rgba(0, 0, 0, 0.45);
+}
+
 .detalle-gasto {
   display: flex;
   flex-direction: column;
